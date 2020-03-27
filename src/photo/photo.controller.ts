@@ -5,30 +5,30 @@ import { PhotoDto } from './photo.dto';
 
 @Controller('photo')
 export class PhotoController {
-  constructor(private readonly photoService: PhotoService) { }
+    constructor(private readonly photoService: PhotoService) { }
 
-  @Get()
-  findAll(): Promise<PhotoEntity[]> {
-    return this.photoService.findAll();
-  }
+    @Get()
+    findAll(): Promise<PhotoEntity[]> {
+        return this.photoService.findAll();
+    }
 
-  @Post('create')
-  create(@Body() PhotoDto: PhotoDto) {
-    return this.photoService.create(PhotoDto)
-  }
+    @Post('create')
+    create(@Body() PhotoDto: PhotoDto) {
+        return this.photoService.create(PhotoDto)
+    }
 
-  @Delete('delete/:id')
-  delete(@Param('id') id: number) {
-    return this.photoService.delete(id)
-  }
+    @Delete('delete/:id')
+    delete(@Param('id') id: number) {
+        return this.photoService.delete(id)
+    }
 
-  @Put('update/:id')
-  update(@Param('id') id: number, @Body() PhotoDto: PhotoDto) {
-    return this.photoService.update(PhotoDto)
-  }
+    @Put('update/:id')
+    update(@Param('id') id: number, @Body() PhotoDto: PhotoDto) {
+        return this.photoService.update(PhotoDto)
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: number): Promise<PhotoEntity> {
-    return this.photoService.findOne(id)
-  }
+    @Get(':id')
+    findOne(@Param('id') id: number): Promise<PhotoEntity> {
+        return this.photoService.findOne(id)
+    }
 }
