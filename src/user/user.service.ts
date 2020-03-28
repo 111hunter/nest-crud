@@ -12,8 +12,9 @@ export class UserService {
     ) { }
 
     async createUser(userDto: UserDto) {
-        const entity = Object.assign(new UserEntity(), userDto)
-        return await this.userRepository.save(entity);
+        // const user = Object.assign(new UserEntity(), userDto)
+        const user = this.userRepository.create(userDto);
+        return await this.userRepository.save(user);
     }
 
     async findUsername(username: string) {
