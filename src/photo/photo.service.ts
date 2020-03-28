@@ -16,15 +16,15 @@ export class PhotoService {
     }
 
     async create(photoDto: PhotoDto) {
-        await this.photoRepository.save(photoDto)
+        return await this.photoRepository.save(photoDto)
     }
 
     async delete(id: number) {
-        await this.photoRepository.delete(id)
+        return await this.photoRepository.delete(id)
     }
 
     async update(photoDto: PhotoDto) {
-        await this.photoRepository.update(photoDto.id, photoDto)
+        return await this.photoRepository.update(photoDto.id, photoDto)
     }
 
     async findOne(id: number): Promise<PhotoEntity> {
