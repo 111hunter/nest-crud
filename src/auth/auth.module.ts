@@ -1,4 +1,3 @@
-import { UserService } from 'src/user/user.service';
 import { AuthController } from './auth.controller';
 import { Module } from '@nestjs/common'
 import { AuthService } from './auth.service'
@@ -19,10 +18,9 @@ import { UserEntity } from 'src/user/user.entity';
             signOptions: { expiresIn: '3600s' },
         }),
         UserModule,
-        TypeOrmModule.forFeature([UserEntity])
     ],
     controllers: [AuthController],
     providers: [AuthService, LocalStrategy, JwtStrategy],
-    exports: [PassportModule, AuthService],
+    exports: [AuthService],
 })
 export class AuthModule { }

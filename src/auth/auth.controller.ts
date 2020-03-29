@@ -1,13 +1,9 @@
 import { UserDto } from './../user/user.dto';
-import { Body, Controller, Get, Post, Query, Request, UseGuards, Res } from '@nestjs/common'
+import { Body, Controller, Get, Post, UseGuards, Res, Request } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
-import { ApiTags, ApiHeader, ApiBearerAuth } from '@nestjs/swagger'
+import { ApiTags, ApiBearerAuth } from '@nestjs/swagger'
 import { AuthService } from 'src/auth/auth.service'
 
-// @ApiHeader({
-//     name: 'Authorization',
-//     description: 'Auth token'
-// })
 @ApiBearerAuth()
 @ApiTags('Auth')
 @Controller('auth')
@@ -18,7 +14,9 @@ export class AuthController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get('users')
-    async findAll(): Promise<any[]> {
+    async findAll(@Request() req): Promise<any[]> {
+        console.log('--------------Auth--Success---------------')
+        console.log(req.user);
         return await this.authService.findAll();
     }
 
@@ -30,7 +28,9 @@ export class AuthController {
 
     @UseGuards(AuthGuard('local'))
     @Post('signIn')
-    async login(@Body() req: UserDto, @Res() res) {
+    async login(@Body() @Request() req: UserDto, @Res() res) {
+        console.log('----------Login--Success-----------')
+        console.log(req);
         const result = await this.authService.login(req);
         res.status(result.statusCode).send(result);
     }

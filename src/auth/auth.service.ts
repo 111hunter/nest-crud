@@ -17,10 +17,10 @@ export class AuthService {
 
     async validateUser(username: string, pass: string): Promise<any> {
         const user = await this.userService.findUsername(username);
-        if (user && bcrypt.compare(pass, user.password)) {
+        console.log('-----------Login-----------')
+        if (user && bcrypt.compareSync(pass, user.password)) {
             return user;
         }
-        console.log('password: [ unknown ]');
         return null;
     }
 
